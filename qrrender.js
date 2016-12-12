@@ -62,7 +62,6 @@ function Turtle(code,used,x,y,inverse=false) {
             if(dy<0) used[y][x] |= 1; // linke Kante
             if(dy>0) used[y][x] |= 2; // rechte Kante
         }
-        //console.log("step",x,y,used[y][x])
         if(!ok(x+dx,y+dy)) {
             // Sackgasse. Im Uhrzeigersinn drehen (auf der Stelle bleiben)
             turnRight();
@@ -101,6 +100,7 @@ function Turtle(code,used,x,y,inverse=false) {
 }
 
 function logBorder(border) {
+    console.log("====");
     for(var j=0;j<border.length;++j) {
         var row = border[j];
         var str = "";
@@ -149,10 +149,10 @@ function draw(code) {
                     turtle.go();
                     if(!count) ctx.beginPath();
                     turtle.render(ctx,500,500);
-                    if(border[j][i-1] == 2) {
+                    if((border[j][i-1] & 2) != 0) {
                         inside = false;
                     }
-                    
+
                     ++count;
                 
                 }
